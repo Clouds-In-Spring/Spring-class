@@ -1,5 +1,4 @@
 ## SpringFramework의 정의
-* * *
 > Spring Framework란?
 ```
 Java 엔터프라이즈 개발을 편하게 해주는 오픈소스 경량급 애플리케이션 프레임워크이다.
@@ -30,7 +29,6 @@ Java 엔터프라이즈 개발을 편하게 해주는 오픈소스 경량급 애
 <br>
 
 ## SpringFramework의 특징
-* * *
 1. 컨테이너 역할
 2. DI(Dependency Injection) 지원
     * 어노테이션 통해서 객체간의 의존관계 설정
@@ -48,7 +46,6 @@ Java 엔터프라이즈 개발을 편하게 해주는 오픈소스 경량급 애
 <br>
 
 ## SpringFramework의 기능요소
-* * *
 <br>
 
 
