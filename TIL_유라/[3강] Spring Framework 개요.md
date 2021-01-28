@@ -12,7 +12,9 @@ Java 엔터프라이즈 개발을 편하게 해주는 오픈소스 경량급 애
 > Spring Framework 전략
 ### Spring 삼각형
 
-![Spring 프레임워크 구성하는 기능 요소](./image/springTriangle.png)
+![spring삼각형](https://user-images.githubusercontent.com/37285946/106130621-eb96ee00-61a4-11eb-8e07-41e616556ae4.png)
+
+
 1. Portable Service Abstraction(서비스 추상화)
     * Object XML Mapping(OXM) 추상화, 특정 DB 액세스의 예외 변환기능 등 기술적 복잡함은 추상화를 통해 Low Level로 기술 구현 / 기술을 사용하는 인터페이스로 분리
 2. DI (의존관계주입)
@@ -49,7 +51,6 @@ Java 엔터프라이즈 개발을 편하게 해주는 오픈소스 경량급 애
 * * *
 <br>
 
-![Spring 프레임워크 구성하는 기능 요소](./image/spring구성기능요소.png)
 
 1. Core 컨테이너
     * 스프링 프레임워크의 기본기능 제공
