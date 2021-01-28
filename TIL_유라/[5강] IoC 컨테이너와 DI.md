@@ -68,3 +68,20 @@ DL은 특정 라이브러리에 종속되기 때문에 DI를 많이 쓴다.
 
 ## DI를 이용한 클래스 호출 방식
 ![DI를이용한클래스호출방식구조](https://user-images.githubusercontent.com/37285946/106128956-2dbf3000-61a3-11eb-903c-a636296b505f.png)
+
+<br>
+<br>
+<br>
+
+# Spring DI 컨테이너   
+
+* Spring DI 컨테이너의 개념
+    - bean
+    - bean들을 관리한다는 의미로 컨테이너를 빈 팩토리(BeanFactory)라고 부른다
+    * 객체의 생성과 객체 사이의 런타임 관계를 DI 관점에서 볼 때는 컨테이너를 BeanFactory라고 한다.
+    * BeanFacotry에 여러가지 컨테이너 기능을 추가하여 애플리케이션 컨텍스트(ApplicationContext)라고 부름
+
+
+    |BeanFactory|Application|
+    |:---|:---|
+    |- 빈을 등록, 생성, 조회, 반환, 관리함<br>- 보통은 빈팩토리를 바로 사용하지 않고 이를 확장한 ApplicationContext를 사용함<br>-getBean() 메서드가 정의되어 있음|-Bean을 등록, 생성, 조회, 반환 관리하는 기능은 BeanFactory와 같음<br>-Spring의 각종 부가 서비스를 추가로 제공함<br>-Spring이 제공하는 ApplicationContext 구현 클래스가 여러가지 종류로 있음|
