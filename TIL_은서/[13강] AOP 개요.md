@@ -98,7 +98,7 @@
 
 #### Spring AOP의 구현 방식
 
-1. XML 기반의 POJO 클래스를 이용한 AOP 구현방식
+1. **XML 기반의 POJO 클래스를 이용한 AOP 구현방식**
 
    * 부가기능을 제공하는 Advice 클래스 작성
 
@@ -106,7 +106,7 @@
 
      ➡ \<aop.config>태그를 이용해 Aspect 설정
 
-2. @Aspect 어노테이션을 이용한 AOP 구현방식
+2. **@Aspect 어노테이션을 이용한 AOP 구현방식**
 
    * @Aspect를 이용해 부가기능을 제공하는 Aspect 클래스 작성
 
