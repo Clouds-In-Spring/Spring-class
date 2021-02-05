@@ -74,7 +74,7 @@ gildong
 <br>
 <br>
 
-## Spring JDBC 설치 및 DataSource 설정
+## Spring JDBC 설치
 1. Spring JDBC 설치
     * 1 ) http://mvnrepository.com
     * 2 ) spring jdbc 검색
@@ -105,7 +105,8 @@ gildong
 
 <br><br>
 
-## 사용자관리 프로젝트의 Bean 등록 및 의존관계 설정
+## DataSource 설정
+사용자관리 프로젝트의 Bean 등록 및 의존관계 설정
 1. \<context:component-scan> 태그 사용  
     beans.xml
     ```xml
@@ -136,8 +137,8 @@ gildong
     ```
     oracle.jdbc.driver.T4CConnection@2dbf4cbd
     ```
-
-3. 사용자 조회 테스트
+## 사용자 관리 프로젝트 테스트
+1. 사용자 조회 테스트
     - UserService의 getUser() 메서드 사용
 
     UserClient.java
@@ -159,10 +160,10 @@ gildong
     ```
     User [userId=gildong, name=홍길동, gender=남, city=서울]
     ```
-4. 사용자 등록 및 목록 조회 테스트
+2. 사용자 등록 및 목록 조회 테스트
     - UserService의 insertUserTest() 메서드 사용
-5. 사용자 갱신
+3. 사용자 갱신
     - updateUserTest()
-6. 사용자 삭제
+4. 사용자 삭제
     - deleteUserTest()
 
