@@ -73,8 +73,6 @@
 
 MyBatis 컴포넌트들을 wrapping하여 개발자가 편리하게 작성할 수 있는 요소제공
 
-##### 개발자에 의해 만들어지는
-
 * SqlSessionFactoryBean
   * 설정파일을 바탕으로 SqlSessionFactory 생성
   * **beans.xml에서 등록되어야 함**
