@@ -102,4 +102,92 @@
 
 # Spring MVC 개념
 
-11분 41초
+#### Spring MVC의 특징
+
+* 서블릿 기반의 웹 개발을 위한 MVC 프레임워크 제공
+* 모델2 아키텍처, Front Controller 패턴을 제공
+* Spring이 제공하는 트랜젝션 처리, DI, AOP 등을 손쉽게 사용할 수 있음
+
+
+
+#### Spring MVC와 Front Controller 패턴
+
+* 대부분의 MVC 프레임워크들은 Front Controller 패턴 적용하여 구현
+
+* Spring MVC도 Front Controller 역할을 하는 **DispatcherServlet이라는 클래스**를 계층 맨 앞단에 놓고,
+
+  **서버로 들어오는 모든 요청을 받아서 처리하도록 구성**
+
+* 예외가 발생했을 때 일관된 방식으로 처리하도록 하는 것도 Front Controller의 역할
+
+
+
+#### DispatcherServlet 클래스
+
+* Front Controller 패턴이 적용된 클래스
+* web.xml에 설정 필요
+* 클라이언트로부터 **모든 요청**을 전달받음
+* Controller나 View같은 Spring MVC 구성요소를 이용해 클라이언트에게 서비스 제공
+
+* 호출 순서
+  1. DispatcherServlet이 들어오는 요청을 맨 앞단에서 받아 Controller(개발자가 작성하는 클래스)에게 요청을 위임
+  2. Controller클래스가 요청 핸들링, DB 연동의 결과물을 모델 객체에 담아 DispatcherServlet에게 전달
+  3. DispatcherServlet은 받은 모델 객체를 View에게 전달
+  4. View 템플릿은 화면을 그리고 결과를 DispatcherServlet에게 전달
+  5. DispatcherServlet은 브라우저에게 응답 결과를 전달
+
+
+
+#### Spring MVC의 주요 구성 요소 (🚨: 개발자가 주로 사용하게 되는 클래스)
+
+* DispatcherServlet 🚨
+
+  : 클라이언트의 요청을 받아 Controller, View에게 알맞게 전달
+
+* HandlerMapping
+
+  : 요청 URL, 요청 정보를 기준으로 어떤 핸들러 객체를 사용할지 결정,
+
+    DispatcherServlet은 하나 이상의 HandlerMapping을 가질 수 있음
+
+* Controller 🚨
+
+  : 클라이언트의 요청 처리 후 Model 호출, 그 결과를 DispatcherServlet에게 전달
+
+* ModelAndView 🚨
+
+  : Controller가 처리한 데이터 및 화면에 대한 정보를 보유한 객체
+
+* View 🚨
+
+  : Controller의 처리 결과 **화면에 대한 정보**를 보유
+
+* ViewResolver
+
+  : Controller가 리턴한 View 이름을 기반으로 어떤 View를 실행할지 결정해주는 역할
+
+
+
+#### Spring MVC 주요 구성 요소의 요청 처리 과정 
+
+1. 클라이언트의 요청이 DispatcherServlet에게 전달
+2. DispatcherServlet은 HandlerMapping를 통해 클라이언트의 요청을 처리할 Controller를 알아냄
+3. DispatcherServlet은 Controller 객체를 이용하여 클라이언트의 요청 처리
+4. Controller는 **요청 처리 결과, View 페이지 정보를 담은 ModelAndView 객체** 반환
+5. DispatcherServlet은 ViewResolver를 통해 응답 결과를 생성할 View 객체를 알아냄
+6. View는 클라이언트에게 전송할 응답 생성하여 DispatcherServlet에게 반환
+
+
+
+# Spring MVC 기반 웹 애플리케이션 개발
+
+#### 앞으로의 작성 절차
+
+1. 클라이언트의 요청을 받는 DispatcherServlet을 web.xml에 설정
+2. 클라이언트의 요청을 처리할 Controller 작성
+3. Spring Bean으로 Controller 등록
+4. JSP를 이용해 View 영역의 코드 작성
+5. Browser상에서 JSP 실행
+
+
+
