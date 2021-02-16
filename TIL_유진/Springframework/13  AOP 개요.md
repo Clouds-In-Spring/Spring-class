@@ -44,15 +44,15 @@
 
   : Advice를 적용할 타겟의 메서드를 선별하는 정규표현식
 
-- Aspect
+* Aspect
 
   : AOP의 기본 모듈, 싱글톤 형태의 객체로 존재
 
-- Advisor (=Aspect)
+* Advisor (=Aspect)
 
   : Advisor = Advice + PointCut, Spring AOP에서만 사용되는 특별한 용어
 
-- Weaving
+* Weaving
 
   : PointCut의해 결정된 Target의 JoinPoint에 Advice를 삽입하는 과정
 
@@ -115,4 +115,35 @@
    * XML 설정파일에 \<aop:aspectj-autoproxy />를 설정
 
 ### 3 AspectJ와 Spring AOP 라이브러리 설치
+
+###### AspectJ Runtime 라이브러리 설치
+
+~~~
+<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.7.4</version>
+        </dependency>
+~~~
+
+###### AspectJ weaver 라이브러리 설치
+
+~~~
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>1.7.4</version>
+		</dependency>
+~~~
+
+###### spring AOP 라이브러리 설치
+
+~~~
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-aop</artifactId>
+		    <version>3.2.17.RELEASE</version>
+		</dependency>
+~~~
 
