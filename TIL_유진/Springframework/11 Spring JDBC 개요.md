@@ -23,9 +23,10 @@
     : 미리 정해진 개수만큼의 DB connection을 풀(pool)에 준비해두고, 애플리케이션이 요청할 때마다 풀에서 꺼내 하나씩 할당하고 다시 돌려받아 풀에 넣는 기법 
 
   - 다중 사용자를 갖는 엔터프라이즈 시스템이라면 반드시 connection 풀링을 지원하는 DataSource 사용해야 함
+
   - Spring에서는 DataSource를 공유 가능한 Bean으로 등록하여 사용
 
-###### DataSource - 클래스 종류
+###### DataSource - 구현 클래스 종류
 
 - 테스트용 DataSource
 
@@ -46,11 +47,18 @@
 ###### JDBC
 
 - 모든 자바의 데이터엑세스 기술의 근간이 된다
+- 안정적이고 유연하지만, 로우 레벨 기술로 인식
+  - 그이유는 간단한 SQL을 실행하는데도 중복된 코드가 반복적으로 사용, DB에 따라 일관성 없는 정보를 가진 채로 Checked Exception으로 처리
+  - **단점 : Connection과 같은 리소스 쓸때, 릴리즈 제대로 안하면 시스템의 자원이 바닥나는 버그 발생**
+  - **장점 : 별도의 학습 없이 개발 가능**
 - 최신 ORM 기술(MyBatis, Hibername 등)도 내부적으로는 DB와의 연동을 위해 JDBC를 이용
 
 ###### Spring JDBC
 
-- Spring JDBC를 사용하려면 먼저 DB 커넥션을 가져오는 DataSource를 Bean으로 등록해야 한다
+- JDBC 장점 + 단점 극복하여 간결한 API 사용법 제공
+- 반복적으로 해야 하는 작업 대신 해줌
+
+- Spring JDBC를 사용하려면 먼저 **DB 커넥션을 가져오는 DataSource를 Bean으로 등록해야 한다**
 
 - JDBC에서 해주지 않았던 작업들을 해줌
 
@@ -62,13 +70,17 @@
 
   - ResultSet Loop 처리 : 쿼리 실행 결과가 한 건 이상이면 ResultSet 루프를 만들어 반복해줌
 
-  - Exception 처리와 반환 : JDBC 작업 중 발생하는 모든 예외를 Spring JDBC 예외 변환기가 처리 as 런타임 예외인 DataAccessException타입으로 변환
+  - Exception 처리와 반환 : JDBC 작업 중 발생하는 모든 예외를 Spring JDBC 예외 변환기가 처리 , 런타임 예외인 DataAccessException타입으로 변환
 
     > Checked Exception : 개발자가 알아서 try, catch 문으로 잡아줘야함
     >
     > Runtime Exception : try, catch 필요X
 
   - Transaction 처리 : Spring JDBC를 쓰면 transaction과 관련된 모든 작업(commit, rollback)에 대해 신경 안써도됨
+
+    - transaction : db 상태 변환하는 작업 단위나 한꺼번에 모두 수행되어야 하는 연산
+      - db시스템에서 병행 제어 및 회복 작업 시 처리되는 작업의 논리적 단위
+      - 하나의 트랜잭션은 commit되거나 rollback ehla
 
 #### 3. Spring JDBC 개요 및 JdbcTemplate 클래스
 
@@ -80,6 +92,16 @@
   - 조회 : 데이터 조회 ex) Select
   - 배치 : 여러 개의 쿼리를 한 번에 수행해야 하는 작업
 
+###### JdbcTemplate 클래스 생성
+
+- DataSource를 파라미터로 받아서 아래와 같이 생성
+
+  - JdbcTemplate template = new JdbcTemplate(dataSource);
+
+- DataSource는 보통 Bean으로 등록해서 사용하므로 JdbcTemplate이 필요한 DAO 클래스에서 DataSource Bean을 DI(의존관계 주입) 받아서 JdbcTemplate을 생성할 때 인자로 넘겨주면 된다
+
+  ![image](https://user-images.githubusercontent.com/38436013/107914876-a77a5a80-6fa6-11eb-90df-16b28fef91f7.png)
+
 ###### update() 메서드
 
 - Insert, Update, Delete와 같은 SQL 실행할 때 사용
@@ -90,12 +112,14 @@
 
   ex) `int result = jdbcTemplate.update("password=?, name=?", user.getpassword(), user.getId());`
 
-###### queryForObjec() 메서드
+###### queryForObject() 메서드
 
 - **여러개의 column, 한 개의 row**로 반환되는 SQL 구문을 처리하는 메서드
 - `<T>T queryForObject(String sql, [SQL 파라미터], RowMapper<T> rm)`
 - T는 VO(Value Object) 객체 타입 중 하나
+- T는 컬럼 여러개 로우는 하나
 - 여러개의 column을 가진 한 개의 row를 **RowMapper 콜백을 이용하여 VO 객체로 매핑**해줌
+  - query() 메서드 : 여러개의 컬럼, 여러개의 row로 반환
 
 ###### query() 메서드
 
@@ -103,7 +127,6 @@
 
 - `<T> List<T> query(String sql, [SQL 파라미터], RowMapper<T> rm)`
 
-- 결과 값은 여러개의 row를(VO 객체) 담아야 하므로 List형태로 받는다
+- 결과 값은 여러개의 row를(VO 객체) 담아야 하므로 List 형태로 받는다
 
   ➡ List의 각 요소가 하나의 row
-
