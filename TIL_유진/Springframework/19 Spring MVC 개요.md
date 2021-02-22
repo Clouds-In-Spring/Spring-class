@@ -59,7 +59,7 @@
 
   -> Spring MVC 도 모델 2 아케틱처 기반의 웹 프레임워크
 
-- 모델 1 호출 순서
+- 모델 2 
 
   ![image](https://user-images.githubusercontent.com/38436013/108628407-0dcb1580-749e-11eb-9984-bbb53e76cbfd.png)
 
